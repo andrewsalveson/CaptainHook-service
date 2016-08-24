@@ -1,1 +1,1 @@
-sudo docker build -t research/zip-lookup ..
+sudo docker build -t $1/$2 ..
