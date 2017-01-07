@@ -50,7 +50,7 @@ RUN apt-get update && apt-get install -y $buildDeps --no-install-recommends
 RUN rm -rf /var/lib/apt/lists/*
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz"
 RUN curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc"
-RUN gpg --verify SHASUMS256.txt.asc
+#RUN gpg --verify SHASUMS256.txt.asc
 RUN grep " node-v$NODE_VERSION-linux-x64.tar.gz\$" SHASUMS256.txt.asc | sha256sum -c - \
     && tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1
 RUN rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc
