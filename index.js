@@ -5,9 +5,15 @@ var port    = 8080;
 
 app.use(morgan('dev')); // log every request to the console
 
-app.get('/route/:arg',function(req,res){
-  var arg = req.params.arg;
-  return res.json({message:"ok "+arg});
+// grasshopper handler
+app.post('/file/gh',function(req,res){
+  return res.json({message:"grasshopper file submitted"+arg});
 });
+app.post('/file/dyn',function(req,res){
+  return res.json({message:"dynamo file submitted"})
+})
+app.post('/file/osm',function(req,res){
+  return res.json({message:"openStudio measures file submitted"});
+})
 app.listen(port);
 console.log('magic is happening on port ' + port);
