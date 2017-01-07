@@ -13,6 +13,7 @@ app.post('/file/dyn',function(req,res){
   return res.json({message:"dynamo file submitted"})
 });
 app.post('/file/osm',function(req,res){
+  exec('./py/osmDiff.py');
   return res.json({message:"openStudio measures file submitted"});
 });
 app.post('/viz',function(req,res){
