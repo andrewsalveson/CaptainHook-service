@@ -39,7 +39,7 @@ RUN ~/.rbenv/shims/gem install bundler
 ENV RUBYLIB /usr/local/lib/site_ruby/2.0.0
 
 #ENV NODE_VERSION 0.10.41
-ENV NODE_VERSION 5.0.0
+ENV NODE_VERSION 7.0.0
 #ENV NPM_VERSION 2.14.1
 ENV NPM_VERSION latest
 #ENV NODE_ENV production
