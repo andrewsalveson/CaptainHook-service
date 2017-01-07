@@ -115,7 +115,12 @@ def osm_diff(model_path, compare_model_path, save_dir)
     #report_path = Dir.pwd + "/report.html"
     
     # write the report
-    File.open(report_path, 'w') do |file|  
+    #File.open(report_path, 'w') do |file|
+    file = []
+      file << "<section>\n<h1>#{num_ignored} objects did not have names and were not compared</h1>\n"
+      file << "</section>\n"
+      
+      file << "<table border='1'>\n"
       file << "<section>\n<h1>Objects Only In Model</h1>\n"
       file << "<table border='1'>\n"
       only_model.each do |object|
@@ -137,10 +142,11 @@ def osm_diff(model_path, compare_model_path, save_dir)
         file << diff
       end
       file << "</section>\n"
-    end
+    #end
   
     #puts "Report generated at: <a href='file:///#{report_path}'>#{report_path}</a>")
-    puts "#{num_ignored} objects did not have names and were not compared"
+    #puts "#{num_ignored} objects did not have names and were not compared"
+    puts file
     
     return true
 end #end osm_diff
