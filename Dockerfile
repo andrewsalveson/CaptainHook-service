@@ -38,7 +38,8 @@ RUN ~/.rbenv/shims/gem install bundler
 # Add RUBYLIB link for openstudio.rb
 ENV RUBYLIB /usr/local/lib/site_ruby/2.0.0
 
-ENV NODE_VERSION 0.10.41
+#ENV NODE_VERSION 0.10.41
+ENV NODE_VERSION 7.0.0
 #ENV NPM_VERSION 2.14.1
 ENV NPM_VERSION latest
 #ENV NODE_ENV production
@@ -46,22 +47,26 @@ ENV NPM_VERSION latest
 RUN buildDeps='curl ca-certificates' \
 	&& set -x \
 	&& apt-get update && apt-get install -y $buildDeps --no-install-recommends \
-	&& rm -rf /var/lib/apt/lists/* 
-RUN	curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz" \
-	&& curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc"
-RUN	gpg --verify SHASUMS256.txt.asc
-RUN	grep " node-v$NODE_VERSION-linux-x64.tar.gz\$" SHASUMS256.txt.asc | sha256sum -c -tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1
-RUN	rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc
-RUN	apt-get purge -y --auto-remove $buildDeps
-#	&& npm install -g npm@"$NPM_VERSION" \
-#	&& npm install -g express-generator \
-#	&& npm cache clear \
-RUN	mkdir /var/www
-#COPY ./package.json /var/www
-#RUN cd /var/www \
-#	&& npm install
-#COPY . /var/www
+	&& rm -rf /var/lib/apt/lists/* \
+	&& curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz" \
+	&& curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
+	&& gpg --verify SHASUMS256.txt.asc \
+	&& grep " node-v$NODE_VERSION-linux-x64.tar.gz\$" SHASUMS256.txt.asc | sha256sum -c - \
+	&& tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
+	&& rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc \
+	&& apt-get purge -y --auto-remove $buildDeps \
+	&& npm install -g npm@"$NPM_VERSION" \
+	&& npm install -g express-generator \
+	&& npm install -g forever \
+	&& npm cache clear \
+	&& mkdir /var/www
+COPY ./package.json /var/www
+RUN cd /var/www \
+	&& npm install
+COPY . /var/www
 
-#EXPOSE 7140
+EXPOSE 7140
 #CMD [ "/usr/local/bin/node","/var/www/index.js" ]
+CMD [ "forever","/var/www/index.js" ]
+
 
