@@ -38,7 +38,8 @@ RUN ~/.rbenv/shims/gem install bundler
 # Add RUBYLIB link for openstudio.rb
 ENV RUBYLIB /usr/local/lib/site_ruby/2.0.0
 
-ENV NODE_VERSION 0.10.41
+#ENV NODE_VERSION 0.10.41
+ENV NODE_VERSION 7.0.0
 #ENV NPM_VERSION 2.14.1
 ENV NPM_VERSION latest
 #ENV NODE_ENV production
@@ -56,6 +57,7 @@ RUN buildDeps='curl ca-certificates' \
 	&& apt-get purge -y --auto-remove $buildDeps \
 	&& npm install -g npm@"$NPM_VERSION" \
 	&& npm install -g express-generator \
+	&& npm install -g forever \
 	&& npm cache clear \
 	&& mkdir /var/www
 COPY ./package.json /var/www
@@ -64,5 +66,7 @@ RUN cd /var/www \
 COPY . /var/www
 
 EXPOSE 7140
-CMD [ "/usr/local/bin/node","/var/www/index.js" ]
+#CMD [ "/usr/local/bin/node","/var/www/index.js" ]
+CMD [ "forever","/var/www/index.js" ]
+
 
