@@ -11,9 +11,12 @@ app.post('/file/gh',function(req,res){
 });
 app.post('/file/dyn',function(req,res){
   return res.json({message:"dynamo file submitted"})
-})
+});
 app.post('/file/osm',function(req,res){
   return res.json({message:"openStudio measures file submitted"});
-})
+});
+app.post('/viz',function(req,res){
+  return res.send("what am I doing?");
+});
 app.listen(port);
 console.log('magic is happening on port ' + port);
