@@ -1,12 +1,11 @@
 #user arguments 
 model_path = ARGV[0]
 compare_model_path = ARGV[1]
-save_dir = ARGV[2]
 
 #example
 #ruby osm_diff.rb "C:/Users/mdahlhausen/Desktop/CaptHook/test.osm" "C:/Users/mdahlhausen/Desktop/CaptHook/test2.osm" "C:/Users/mdahlhausen/Desktop/CaptHook"
 
-def osm_diff(model_path, compare_model_path, save_dir)
+def osm_diff(model_path, compare_model_path)
     require 'openstudio'
     
     # load the models
@@ -109,11 +108,7 @@ def osm_diff(model_path, compare_model_path, save_dir)
       end
 
     end
-      
-    # path for reports
-    report_path = save_dir + "/diff_report.html"
-    #report_path = Dir.pwd + "/report.html"
-    
+       
     # write the report
     #File.open(report_path, 'w') do |file|
     file = []
@@ -152,5 +147,5 @@ def osm_diff(model_path, compare_model_path, save_dir)
 end #end osm_diff
 
 #call differencing function
-#output file is saved to save_dir/diff_report.html
-run_success = osm_diff(model_path, compare_model_path, save_dir)
+#puts prints html content to stdout
+run_success = osm_diff(model_path, compare_model_path)
