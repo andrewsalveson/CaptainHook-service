@@ -7,6 +7,8 @@ var busboy  = require('connect-busboy');
 var fs      = require('fs');
 var port    = 8080;
 
+fs.mkdirSync('/var/www/tmp');
+
 app.use(morgan('dev')); // log every request to the console
 
 app.use(busboy());
@@ -23,7 +25,7 @@ app.post('/file/osm',function(req,res){
   var complete = 0;
   var oldStream, newStream;
   var tmpName = String(Math.random()).substr(10)+String((new Date()).getTime());
-  var tmpPath = __dirname + '/tmp/'+tmpName;
+  var tmpPath = './tmp/'+tmpName;
   var oldPath = tmpPath+'old';
   var newPath = tmpPath+'new';
   console.log('old',oldPath,'new',newPath);
@@ -31,7 +33,7 @@ app.post('/file/osm',function(req,res){
     console.log('check if complete == 2; complete:',complete);
     if(complete==2){
       console.log('all files uploaded');
-      var diff = spawn('ruby',['./rb/osm_diff.rb',oldPath,newPath]);
+      var diff = spawn('ruby',['/var/www/rb/osm_diff.rb',oldPath,newPath]);
       diff.stdout.on('data',function(sdata){
         res.write(sdata);
       });
