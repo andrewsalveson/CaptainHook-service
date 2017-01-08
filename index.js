@@ -29,17 +29,17 @@ app.post('/file/osm',function(req,res){
     if(complete==2){
       console.log('all files uploaded');
       var diff = spawn('ruby',['./rb/osm_diff.rb',oldPath,newPath]);
-      diff.stdout.on('data',function(data){
-        res.write(data);
+      diff.stdout.on('data',function(sdata){
+        res.write(sdata);
       });
-      diff.stderr.on('data',function(data){
-        console.log('error:',data);
-        res.write(data);
+      diff.stderr.on('data',function(edata){
+        console.log('error:',edata);
+        res.write(edata);
       });
       diff.on('exit',function(code){
         res.end();
-        fs.unlink(oldPath);
-        fs.unlink(newPath);
+        // fs.unlink(oldPath);
+        // fs.unlink(newPath);
       });
     }
   };
