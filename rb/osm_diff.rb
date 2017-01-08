@@ -8,7 +8,7 @@ compare_model_path = ARGV[1]
     # puts "model_path: #{model_path}"
     # puts "compare_model_path: #{compare_model_path}"
 
-require 'openstudio'
+require '/usr/local/lib/openstudio-1.14.0/ruby/2.0/openstudio.rb'
 
 #example
 #ruby osm_diff.rb "C:/Users/mdahlhausen/Desktop/CaptHook/test.osm" "C:/Users/mdahlhausen/Desktop/CaptHook/test2.osm" "C:/Users/mdahlhausen/Desktop/CaptHook"
