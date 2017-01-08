@@ -33,8 +33,8 @@ app.post('/file/osm',function(req,res){
     String((new Date()).getTime())+
     String(Math.random()).substr(10);
   var tmpPath = tmpFolder+tmpName;
-  var oldPath = tmpPath+'old';
-  var newPath = tmpPath+'new';
+  var oldPath = tmpPath+'old.osm';
+  var newPath = tmpPath+'new.osm';
   console.log('old',oldPath,'new',newPath);
   var onComplete = function(){
     console.log('check if complete == 2; complete:',complete);
