@@ -57,6 +57,7 @@ RUN rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc
 RUN apt-get purge -y --auto-remove $buildDeps
 #RUN npm install -g npm@"$NPM_VERSION"
 RUN npm install --production
+RUN npm install express
 RUN mv ./node_modules ./node_modules.tmp && mv ./node_modules.tmp ./node_modules && npm install
 RUN npm install -g express-generator
 RUN npm install -g forever
