@@ -45,7 +45,7 @@ app.post('/file/osm',function(req,res){
       var who = execSync('whoami');
       console.log('I am',who.toString());
       // var command = 'ruby /var/www/rb/osm_diff.rb '+oldPath+' '+newPath;
-      var command = 'ruby /var/www/rb/test.rb '+oldPath+' '+newPath;
+      var command = 'bash /var/www/rb/osm_diff.sh '+oldPath+' '+newPath;
       console.log('exec:',command);
       var result = execSync(command);
       res.send(result);
