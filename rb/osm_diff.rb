@@ -2,11 +2,12 @@
 model_path = ARGV[0]
 compare_model_path = ARGV[1]
 
+require 'openstudio'
+
 #example
 #ruby osm_diff.rb "C:/Users/mdahlhausen/Desktop/CaptHook/test.osm" "C:/Users/mdahlhausen/Desktop/CaptHook/test2.osm" "C:/Users/mdahlhausen/Desktop/CaptHook"
 
 def osm_diff(model_path, compare_model_path)
-    require 'openstudio'
     
     # load the models
     vt = OpenStudio::OSVersion::VersionTranslator.new
