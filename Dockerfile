@@ -40,8 +40,8 @@ ENV RUBYLIB /usr/local/lib/site_ruby/2.0.0
 
 #ENV NODE_VERSION 0.10.41
 ENV NODE_VERSION 7.0.0
-#ENV NPM_VERSION 2.14.1
-ENV NPM_VERSION latest
+ENV NPM_VERSION 2.14.1
+#ENV NPM_VERSION latest
 #ENV NODE_ENV production
 
 RUN buildDeps='curl ca-certificates'
@@ -55,7 +55,7 @@ RUN grep " node-v$NODE_VERSION-linux-x64.tar.gz\$" SHASUMS256.txt.asc | sha256su
     && tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1
 RUN rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc
 RUN apt-get purge -y --auto-remove $buildDeps
-RUN npm install -g npm
+RUN npm install -g npm@"$NPM_VERSION"
 RUN npm install -g express-generator
 RUN npm install -g forever
 RUN npm cache clear
