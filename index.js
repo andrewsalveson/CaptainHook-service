@@ -42,8 +42,11 @@ app.post('/file/osm',function(req,res){
       console.log('all files uploaded, running Ruby command:');
       console.log('oldPath',oldPath);
       console.log('newPath',newPath);
-      
-      var result = execSync('ruby /var/www/rb/osm_diff.rb '+oldPath+' '+newPath);
+      var who = execSync('whoami');
+      console.log('I am',who);
+      var command = 'ruby /var/www/rb/osm_diff.rb '+oldPath+' '+newPath;
+      console.log('exec:',command);
+      var result = execSync(command);
       res.send(result);
       // var diff = spawn('ruby',['']);
       // var diff = spawn('ruby /var/www/rb/osm_diff.rb',[oldPath,newPath]);
