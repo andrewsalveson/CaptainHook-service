@@ -9,6 +9,9 @@ require 'openstudio'
 
 def osm_diff(model_path, compare_model_path)
     
+    puts "model_path: #{model_path}"
+    puts "compare_model_path: #{compare_model_path}"
+    
     # load the models
     vt = OpenStudio::OSVersion::VersionTranslator.new
     model = vt.loadModel(model_path)
