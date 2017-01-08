@@ -8,4 +8,4 @@ compare_model_path = ARGV[1]
     # puts "model_path: #{model_path}"
     # puts "compare_model_path: #{compare_model_path}"
 
-require 'openstudio'
+require_relative 'openstudio'
