@@ -18,6 +18,7 @@ app.post('/file/dyn',function(req,res){
   return res.json({message:"dynamo file submitted"})
 });
 app.post('/file/osm',function(req,res){
+  console.log('osm received');
   req.pipe(req.busboy);
   var complete = 0;
   var oldStream, newStream;
@@ -25,7 +26,9 @@ app.post('/file/osm',function(req,res){
   var tmpPath = __dirname + '/tmp/'+tmpName;
   var oldPath = tmpPath+'old';
   var newPath = tmpPath+'new';
+  console.log('old',oldPath,'new',newPath);
   var onComplete = function(){
+    console.log('check if complete == 2; complete:',complete);
     if(complete==2){
       console.log('all files uploaded');
       var diff = spawn('ruby',['./rb/osm_diff.rb',oldPath,newPath]);
@@ -45,6 +48,7 @@ app.post('/file/osm',function(req,res){
   };
   req.busboy.on('file',function(fieldname,file,filename){
     if(fieldname=="model"){
+      console.log('creating stream for model');
       oldStream = fs.createWriteStream(oldPath);
       file.pipe(oldStream);
       oldStream.on('close',function(){
@@ -54,6 +58,7 @@ app.post('/file/osm',function(req,res){
       });
     }
     if(fieldname=="compare"){
+      console.log('creating stream for compare');
       newStream = fs.createWriteStream(newPath);
       file.pipe(newStream);
       newStream.on('close',function(){
