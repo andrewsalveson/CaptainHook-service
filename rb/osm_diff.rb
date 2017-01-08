@@ -15,9 +15,8 @@ require '/usr/local/lib/openstudio-1.14.0/ruby/2.0/openstudio.rb'
 
 def osm_diff(model_path, compare_model_path)
     
-    puts "model_path: #{model_path}"
-    puts "compare_model_path: #{compare_model_path}"
-    
+    # puts "model_path: #{model_path}"
+    # puts "compare_model_path: #{compare_model_path}"
     
     # load the models
     vt = OpenStudio::OSVersion::VersionTranslator.new
