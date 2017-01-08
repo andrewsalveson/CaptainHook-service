@@ -69,7 +69,7 @@ RUN cd /var/www \
     && npm install
 COPY . /var/www
 
-EXPOSE 7140
+EXPOSE 8080
 #CMD [ "/usr/local/bin/node","/var/www/index.js" ]
 CMD [ "forever","/var/www/index.js" ]
 
