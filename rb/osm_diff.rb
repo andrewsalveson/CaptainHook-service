@@ -149,4 +149,8 @@ end #end osm_diff
 
 #call differencing function
 #puts prints html content to stdout
-run_success = osm_diff(model_path, compare_model_path)
+if(model_path && compare_model_path)then
+  run_success = osm_diff(model_path, compare_model_path)
+else
+  raise 'path is nil'
+end
