@@ -35,7 +35,7 @@ app.post('/file/osm',function(req,res){
       console.log('all files uploaded, running Ruby command:');
       console.log('oldPath',oldPath);
       console.log('newPath',newPath);
-      var diff = spawn('ruby',['/var/www/rb/osm_diff.rb',oldPath,newPath]);
+      // var diff = spawn('ruby',['/var/www/rb/osm_diff.rb',oldPath,newPath]);
       diff.stdout.on('data',function(sdata){
         res.write(sdata);
       });
