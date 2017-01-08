@@ -1,11 +1,14 @@
 #user arguments 
-model_path = ARGV[0]
-compare_model_path = ARGV[1]
+# model_path = ARGV[0]
+# compare_model_path = ARGV[1]
 
-    puts "model_path: #{model_path}"
-    puts "compare_model_path: #{compare_model_path}"
+require 'csv'
 
-require 'openstudio'
+    # puts "model_path: #{model_path}"
+    # puts "compare_model_path: #{compare_model_path}"
+
+    
+# require 'openstudio'
 
 #example
 #ruby osm_diff.rb "C:/Users/mdahlhausen/Desktop/CaptHook/test.osm" "C:/Users/mdahlhausen/Desktop/CaptHook/test2.osm" "C:/Users/mdahlhausen/Desktop/CaptHook"
