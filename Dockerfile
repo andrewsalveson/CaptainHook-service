@@ -64,6 +64,7 @@ RUN npm cache clear
 RUN mkdir /var/www
 COPY ./package.json /var/www
 RUN cd /var/www
+RUN ls -l
 RUN npm install express
 RUN npm install
 COPY . /var/www
