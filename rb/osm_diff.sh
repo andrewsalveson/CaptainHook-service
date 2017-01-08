@@ -1,1 +1,1 @@
-ruby /var/www/rb/osm_diff.rb $1 $2
+/root/.rbenv/shims/ruby /var/www/rb/osm_diff.rb $1 $2
