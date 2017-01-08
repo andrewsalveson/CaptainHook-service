@@ -36,7 +36,7 @@ RUN echo 'eval "$(rbenv init -)"' >> ~/.bashrc
 RUN ~/.rbenv/shims/gem install bundler
 
 # Add RUBYLIB link for openstudio.rb
-ENV RUBYLIB /usr/local/lib/site_ruby/2.0.0
+ENV RUBYLIB /usr/local/lib/openstudio-1.14.0/site_ruby/2.0.0
 
 #ENV NODE_VERSION 0.10.41
 ENV NODE_VERSION 7.0.0
