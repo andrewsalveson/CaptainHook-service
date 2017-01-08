@@ -24,8 +24,10 @@ app.post('/file/osm',function(req,res){
   req.pipe(req.busboy);
   var complete = 0;
   var oldStream, newStream;
-  var tmpName = String(Math.random()).substr(10)+String((new Date()).getTime());
-  var tmpPath = './tmp/'+tmpName;
+  var tmpName =
+    String((new Date()).getTime())+
+    String(Math.random()).substr(10);
+  var tmpPath = '/var/www/tmp/'+tmpName;
   var oldPath = tmpPath+'old';
   var newPath = tmpPath+'new';
   console.log('old',oldPath,'new',newPath);
