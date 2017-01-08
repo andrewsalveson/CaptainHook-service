@@ -1,11 +1,12 @@
-var util    = require('util');
-var spawn   = require('child_process').spawn;
-var express = require('express');
-var app     = express();
-var morgan  = require('morgan');
-var busboy  = require('connect-busboy');
-var fs      = require('fs');
-var port    = 8080;
+var util     = require('util');
+var spawn    = require('child_process').spawn;
+var execSync = require('child_process').execSync;
+var express  = require('express');
+var app      = express();
+var morgan   = require('morgan');
+var busboy   = require('connect-busboy');
+var fs       = require('fs');
+var port     = 8080;
 
 var tmpFolder = '/var/www/tmp/';
 
@@ -41,20 +42,23 @@ app.post('/file/osm',function(req,res){
       console.log('all files uploaded, running Ruby command:');
       console.log('oldPath',oldPath);
       console.log('newPath',newPath);
+      
+      var result = execSync('ruby /var/www/rb/osm_diff.rb '+oldPath+' '+newPath);
+      res.send(result);
       // var diff = spawn('ruby',['']);
-      var diff = spawn('ruby /var/www/rb/osm_diff.rb',[oldPath,newPath]);
-      diff.stdout.on('data',function(sdata){
-        res.write(sdata);
-      });
-      diff.stderr.on('data',function(edata){
-        console.log('error:',edata);
-        res.write(edata);
-      });
-      diff.on('exit',function(code){
-        res.end();
+      // var diff = spawn('ruby /var/www/rb/osm_diff.rb',[oldPath,newPath]);
+      // diff.stdout.on('data',function(sdata){
+        // res.write(sdata);
+      // });
+      // diff.stderr.on('data',function(edata){
+        // console.log('error:',edata);
+        // res.write(edata);
+      // });
+      // diff.on('exit',function(code){
+        // res.end();
         // fs.unlink(oldPath);
         // fs.unlink(newPath);
-      });
+      // });
     }
   };
   req.busboy.on('file',function(fieldname,file,filename){
