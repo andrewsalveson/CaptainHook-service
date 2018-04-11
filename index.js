@@ -24,14 +24,14 @@ app.post('/file/gh',function(req,res){
 app.post('/file/dyn',function(req,res){
   return res.json({message:"dynamo file submitted"})
 });
-// app.get('/job/osm/:id',function(req,res){
-  // if(fs.fileExists(tmpPath+'/'+req.params.id)){
-    // var readStream = fs.readStream(tmpPath+'/'+req.params.id+'/output.whatever');
-    // readStream.pipe(res);
-  // }else{
-    // res.send('job not ready yet');
-  // }
-// });
+app.get('/job/osm/:id',function(req,res){
+  if(fs.fileExists(tmpPath+'/'+req.params.id)){
+    var readStream = fs.readStream(tmpPath+'/'+req.params.id+'/output.whatever');
+    readStream.pipe(res);
+  }else{
+    res.send('job not ready yet');
+  }
+});
 app.post('/file/osm',function(req,res){
   console.log('osm received');
   req.pipe(req.busboy);
